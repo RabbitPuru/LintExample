@@ -15,12 +15,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- by ISSUE_ATTR,
+        if its quickFixData doesn't has reformat(true),
+        "android:src="" />" doesn't be placed to the next line.
+        It is just replace '/>'  -->
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <LinearLayout
         android:layout_width="200dp"

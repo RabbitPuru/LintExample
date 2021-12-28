@@ -4,9 +4,9 @@ import com.android.resources.ResourceFolderType
 import com.android.tools.lint.detector.api.*
 import org.w3c.dom.Element
 
-class CustomXmlElementDetector: Detector(), Detector.XmlScanner {
+class CustomXmlElementDetector : Detector(), Detector.XmlScanner {
     companion object {
-        val ISSUE_ATTR : Issue = Issue.create(
+        val ISSUE_ATTR: Issue = Issue.create(
             "ImageViewSrc",
             "ImageView has to have `android:src`",
             "You must add `android:src` to ImageView",
@@ -16,7 +16,7 @@ class CustomXmlElementDetector: Detector(), Detector.XmlScanner {
             Implementation(CustomXmlElementDetector::class.java, Scope.RESOURCE_FILE_SCOPE)
         )
 
-        val ISSUE_PARENT : Issue = Issue.create(
+        val ISSUE_PARENT: Issue = Issue.create(
             "ImageViewParentIncorrect",
             "ImageView fits with `androidx.constraintlayout.widget.ConstraintLayout`",
             "ImageView fits with `androidx.constraintlayout.widget.ConstraintLayout`, you have to move it to `androidx.constraintlayout.widget.ConstraintLayout`",
@@ -36,15 +36,25 @@ class CustomXmlElementDetector: Detector(), Detector.XmlScanner {
     }
 
 
-
     override fun visitElement(context: XmlContext, element: Element) {
         // You can use `element.hasAttribute("src")`, but for separate `android:src` from `tools:src`, you should use hasAttributeNS
         if (!element.hasAttributeNS("http://schemas.android.com/apk/res/android", "src")) {
+            val quickfixData = LintFix.create()
+                .name("add `android:src`")
+                .replace()
+                .range(context.getLocation(element))
+                .all()
+                .text("/>")
+                .with("android:src=\"\"/>")
+                .reformat(true)
+                .build()
+
             context.report(
                 issue = ISSUE_ATTR,
                 scope = element,
                 location = context.getNameLocation(element),
-                message = "You must add `android:src` to ImageView"
+                message = ISSUE_ATTR.getExplanation(TextFormat.TEXT),
+                quickfixData = quickfixData
             )
         }
 
@@ -53,7 +63,7 @@ class CustomXmlElementDetector: Detector(), Detector.XmlScanner {
                 issue = ISSUE_PARENT,
                 scope = element,
                 location = context.getNameLocation(element),
-                message = "ImageView fits with `androidx.constraintlayout.widget.ConstraintLayout`"
+                message = ISSUE_PARENT.getExplanation(TextFormat.TEXT)
             )
         }
     }
