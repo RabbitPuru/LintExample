@@ -25,7 +25,6 @@ class CustomMethodCallDetector : Detector(), Detector.UastScanner {
     }
 
     override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
-        super.visitMethodCall(context, node, method)
         val evaluator = context.evaluator
 
         if (evaluator.isMemberInClass(method, "tongtong.lapin.lint.exemple.CustomClass")) {

@@ -67,4 +67,8 @@ class CustomXmlElementDetector : Detector(), Detector.XmlScanner {
             )
         }
     }
+
+    override fun afterCheckEachProject(context: Context) {
+        super.afterCheckEachProject(context)
+    }
 }
