@@ -1,7 +1,5 @@
 package tongtong.lapin.lint.exemple.examples
 
-import android.content.Context
-
 class Example4 {
     fun set() {
         Setter().apply {

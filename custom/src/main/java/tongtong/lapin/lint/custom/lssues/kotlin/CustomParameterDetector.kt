@@ -46,7 +46,7 @@ class CustomParameterDetector : Detector(), Detector.UastScanner {
             context.report(
                 ISSUE,
                 Location.create(context.file),
-                "Detected from Example5 : method = ${method.name}, value = ${getValue(value)}, type = ${value?.javaClass?.name}, evaluatedType = ${typeEvaluator?.canonicalText}"
+                "Detected from Example4 : method = ${method.name}, value = ${getValue(value)}, type = ${value?.javaClass?.name}, evaluatedType = ${typeEvaluator?.canonicalText}"
             )
 
         }

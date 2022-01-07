@@ -7,6 +7,7 @@ import tongtong.lapin.lint.custom.lssues.kotlin.CustomMethodCallCountDetector
 import tongtong.lapin.lint.custom.lssues.kotlin.CustomMethodCallDetector
 import tongtong.lapin.lint.custom.lssues.kotlin.CustomMethodNameChangeDetetor
 import tongtong.lapin.lint.custom.lssues.kotlin.CustomParameterDetector
+import tongtong.lapin.lint.custom.lssues.kotlin.CustomParameterTypeDetector
 import tongtong.lapin.lint.custom.lssues.xml.CustomXmlAttributeDetector
 import tongtong.lapin.lint.custom.lssues.xml.CustomXmlElementDetector
 
@@ -20,7 +21,8 @@ class CustomIssueRegistry : IssueRegistry() {
             CustomClassDetector.ISSUE_OVERRIDE,
             CustomMethodCallCountDetector.ISSUE,
             CustomParameterDetector.ISSUE,
-            CustomMethodNameChangeDetetor.ISSUE
+            CustomMethodNameChangeDetetor.ISSUE,
+            CustomParameterTypeDetector.ISSUE
         )
 
 }
